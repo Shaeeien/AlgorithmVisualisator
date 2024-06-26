@@ -13,6 +13,48 @@ namespace AlgorithmsVisualisator.Algorithms
             Console.WriteLine();
         }
 
+        public static T[] CrazySort(T[] array, bool ascending)
+        {
+            if (array.Length > 10) throw new Exception("Array too big!");
+            Random rand = new Random();
+            while (!IsSorted(array, ascending))
+            {
+                int numOfSwaps = rand.Next(100);
+                for (int i = 0; i < numOfSwaps; i++)
+                {
+                    int firstSwapIndex = rand.Next(array.Length);
+                    int secondSwapIndex = rand.Next(array.Length);
+                    (array[firstSwapIndex], array[secondSwapIndex]) = (array[secondSwapIndex], array[firstSwapIndex]);
+                    WriteArray(array);
+                    if (IsSorted(array, ascending))
+                        return array;
+                }
+            }            
+            return array;
+        }
+
+        private static bool IsSorted(T[] array, bool ascending)
+        {
+            for(int i = 0; i < array.Length - 1; i++)
+            {
+                if (ascending)
+                {
+                    if (!(array[i + 1].CompareTo(array[i]) > 0))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!(array[i + 1].CompareTo(array[i]) < 0))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         public static T[] InsertionSort(T[] array, bool ascending)
         {            
             for(int i = 1; i < array.Length; i++)

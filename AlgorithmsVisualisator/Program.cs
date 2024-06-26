@@ -9,7 +9,7 @@ namespace AlgorithmsVisualisator
             var builder = WebApplication.CreateBuilder(args);
             int[] array = { 3, 2, 1, 5, 4, 7, 6, 0, 9, 8 };
             Sorting<int>.WriteArray(array);
-            var res = Sorting<int>.SelectionSort(array, false);
+            var res = Sorting<int>.InsertionSort(array, false);
             // Add services to the container.
             builder.Services.AddRazorPages();
 

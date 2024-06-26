@@ -13,6 +13,36 @@ namespace AlgorithmsVisualisator.Algorithms
             Console.WriteLine();
         }
 
+        public static T[] InsertionSort(T[] array, bool ascending)
+        {            
+            for(int i = 1; i < array.Length; i++)
+            {
+                T current = array[i];
+                int j = i - 1;
+                if (ascending)
+                {
+                    while (j >= 0 && array[j].CompareTo(current) > 0)
+                    {
+                        array[j + 1] = array[j];
+                        j--;
+                    }
+                }
+                else
+                {
+                    while (j >= 0 && array[j].CompareTo(current) < 0)
+                    {
+                        array[j + 1] = array[j];
+                        j--;
+                    }
+                }
+                
+                array[j + 1] = current;
+                WriteArray(array);
+            }
+            
+            return array;
+        }
+
         public static T[] SelectionSort(T[] array,  bool ascending)
         {
             for(int i = 0; i < array.Length - 1; i++)
@@ -45,9 +75,7 @@ namespace AlgorithmsVisualisator.Algorithms
             }
             WriteArray(array);
             return array;
-        }
-
-       
+        }      
 
         public static T[] QuickSort(ref T[] array, bool ascending, int leftIndex, int rightIndex)
         {

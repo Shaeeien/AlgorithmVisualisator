@@ -13,6 +13,42 @@ namespace AlgorithmsVisualisator.Algorithms
             Console.WriteLine();
         }
 
+        public static T[] SelectionSort(T[] array,  bool ascending)
+        {
+            for(int i = 0; i < array.Length - 1; i++)
+            {
+                if (ascending)
+                {
+                    int smallestIndex = i;
+                    for (int j = i + 1; j < array.Length; j++)
+                    {
+                        if (array[j].CompareTo(array[smallestIndex]) < 0)
+                        {
+                            smallestIndex = j;
+                        }
+                    }
+                    (array[i], array[smallestIndex]) = (array[smallestIndex], array[i]);
+                }
+                else
+                {
+                    int biggestIndex = i;
+                    for (int j = i + 1; j < array.Length; j++)
+                    {
+                        if (array[j].CompareTo(array[biggestIndex]) > 0)
+                        {
+                            biggestIndex = j;
+                        }
+                    }
+                    (array[i], array[biggestIndex]) = (array[biggestIndex], array[i]);
+                }
+                
+            }
+            WriteArray(array);
+            return array;
+        }
+
+       
+
         public static T[] QuickSort(ref T[] array, bool ascending, int leftIndex, int rightIndex)
         {
             int i = leftIndex;

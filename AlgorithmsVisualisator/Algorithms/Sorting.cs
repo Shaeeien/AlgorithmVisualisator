@@ -25,10 +25,9 @@ namespace AlgorithmsVisualisator.Algorithms
                     int firstSwapIndex = rand.Next(array.Length);
                     int secondSwapIndex = rand.Next(array.Length);
                     (array[firstSwapIndex], array[secondSwapIndex]) = (array[secondSwapIndex], array[firstSwapIndex]);
-                    WriteArray(array);
-                    if (IsSorted(array, ascending))
-                        return array;
+                    
                 }
+                WriteArray(array);
             }            
             return array;
         }

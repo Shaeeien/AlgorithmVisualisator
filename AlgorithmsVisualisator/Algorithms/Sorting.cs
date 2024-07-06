@@ -1,8 +1,9 @@
-﻿using System.Numerics;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Numerics;
 
 namespace AlgorithmsVisualisator.Algorithms
 {
-    public static class Sorting<T> where T : IComparable
+    public class Sorting<T> where T : IComparable
     {
         public static void WriteArray(T[] array)
         {
@@ -11,6 +12,53 @@ namespace AlgorithmsVisualisator.Algorithms
                 Console.Write(array[i] + " ");
             }
             Console.WriteLine();
+        }
+
+        public static T[] MergeSort(T[] array, bool ascending, int begin, int end)
+        {
+            if(begin < end)
+            {
+                int q = (begin + end) / 2;
+                MergeSort(array, ascending, begin, q);
+                MergeSort(array, ascending, q + 1, end);
+                Merge(ref array, begin, end, ascending);
+            }
+            return array;
+        }
+
+        private static void Merge(ref T[] array, int beginning, int end, bool ascending)
+        {
+            int i = beginning;            
+            int middle = (beginning + end) / 2;
+            int j = middle + 1;
+            int k = 0;
+            T[] tmp = new T[array.Length];
+            while(i <= middle && j <= end)
+            {
+                if(ascending)
+                    tmp[k++] = array[i].CompareTo(array[j]) > 0 ? array[i++] : array[j++];
+                else
+                    tmp[k++] = array[i].CompareTo(array[j]) < 0 ? array[i++] : array[j++];
+            }
+            if(i <= middle)
+            {
+                for(int x = i; x <= middle; x++)
+                {
+                    tmp[k++] = array[x];
+                }
+            }
+            if(j <= end)
+            {   
+                for(int t = j; t <= end; t++)
+                {
+                    tmp[k++] = array[t];
+                }   
+            }
+            for (int y = beginning; y <= end; y++)
+            {
+                array[y] = tmp[y - beginning];
+            }
+            WriteArray(array);
         }
 
         public static T[] CrazySort(T[] array, bool ascending)
